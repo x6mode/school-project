@@ -1,0 +1,4 @@
+/prisma/migrations
+database.db-journal
+/node_modules
+/database.db
