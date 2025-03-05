@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node src/bot.js",
-    "prisma": "npx prisma migrate dev --name init"
+    "prisma": "npx prisma generate && npx prisma migrate dev --name init"
   },
   "keywords": [],
   "author": "",
