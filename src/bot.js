@@ -21,13 +21,22 @@ bot.start((ctx) => ctx.replyWithHTML(messages.startCommand));
 
 // Покупка товара
 
-bot.command('buy', (ctx) => {});
+bot.command('buy', async (ctx) => {
+  await ctx.sendInvoice({
+    title: 'Пополнение баланса',
+    description: 'В телеграм боте для продаж',
+    payload: '123',
+    currency: 'XTR',
+    prices: [{ label: 'dsfad', amount: 123 }],
+    provider_token: ''
+  });
+});
 
 // Добавление товара
 
 bot.command('add', (ctx) => {
   const chatId = ctx.message.id;
-  userResponses[chatId] = { step: 1, answers: [] };
+  userResponses[chatId] = { step: 0, answers: [] };
   ctx.replyWithHTML(messages.questions[0]);
 });
 
@@ -36,7 +45,7 @@ bot.command('add', (ctx) => {
 bot.command('remove', async (ctx) => {
   const number = ctx.message.text.split(' ')[1];
   if (!number || isNaN(number)) return ctx.replyWithHTML(messages.invalidRemove);
-  
+
   await dbService.product.delete({ where: { id: parseInt(number) } });
   ctx.replyWithHTML(messages.deletedItem.replace('%id%', number));
 });
@@ -70,7 +79,7 @@ bot.on('text', async (ctx) => {
 
   userData.answers.push(ctx.message.text);
   
-  if ( userData.step === messages.questions.length - 1 ) {
+  if ( userData.step === messages.questions.length - 1) {
     ctx.replyWithHTML(
       messages.catalogItemAdded
       .replace("%name%", userData.answers[0])
@@ -79,7 +88,8 @@ bot.on('text', async (ctx) => {
     await dbService.product.create({
       data: {
         name: userData.answers[0],
-        description: userData.answers[1]
+        description: userData.answers[1],
+        price: parseInt(userData.answers[2])
       }
     });
     
