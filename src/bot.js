@@ -21,13 +21,20 @@ bot.start((ctx) => ctx.replyWithHTML(messages.startCommand));
 
 // Покупка товара
 
+
 bot.command('buy', async (ctx) => {
+  const number = ctx.message.text.split(' ')[1];
+  if (!number || isNaN(number)) return ctx.replyWithHTML(messages.invalidRemove);
+
+  const product = await dbService.product.findFirst({ where: { id: parseInt(number) } });
+  if ( product === null ) return;
+  
   await ctx.sendInvoice({
-    title: 'Пополнение баланса',
-    description: 'В телеграм боте для продаж',
-    payload: '123',
+    title: `Оплата товара #${ product.id }`,
+    description: `**Название**: ${ product.name }`,
+    payload: product.id,
     currency: 'XTR',
-    prices: [{ label: 'dsfad', amount: 123 }],
+    prices: [{ label: 'XTR', amount: product.price }],
     provider_token: ''
   });
 });
