@@ -27,7 +27,7 @@ bot.command('buy', (ctx) => {});
 
 bot.command('add', (ctx) => {
   const chatId = ctx.message.id;
-  userResponses[chatId] = { step: 0, answers: [] };
+  userResponses[chatId] = { step: 1, answers: [] };
   ctx.replyWithHTML(messages.questions[0]);
 });
 
@@ -36,7 +36,7 @@ bot.command('add', (ctx) => {
 bot.command('remove', async (ctx) => {
   const number = ctx.message.text.split(' ')[1];
   if (!number || isNaN(number)) return ctx.replyWithHTML(messages.invalidRemove);
-
+  
   await dbService.product.delete({ where: { id: parseInt(number) } });
   ctx.replyWithHTML(messages.deletedItem.replace('%id%', number));
 });
@@ -69,16 +69,20 @@ bot.on('text', async (ctx) => {
   if ( ctx.message.text === '/cancel' ) return delete userResponses[chatId];
 
   userData.answers.push(ctx.message.text);
-
+  
   if ( userData.step === messages.questions.length - 1 ) {
-    ctx.replyWithHTML(`Ваш товар: <b>${userData.answers[0]}</b>\n\n<b>С описанием:</b>\n${userData.answers[1]}\n\nУспешно добавлен`, {});
+    ctx.replyWithHTML(
+      messages.catalogItemAdded
+      .replace("%name%", userData.answers[0])
+      .replace("%desc%", userData.answers[1])
+    );
     await dbService.product.create({
       data: {
         name: userData.answers[0],
         description: userData.answers[1]
       }
     });
-
+    
     delete userResponses[chatId];
     return;
   }
