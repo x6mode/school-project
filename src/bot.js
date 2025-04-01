@@ -28,21 +28,25 @@ bot.command('buy', async (ctx) => {
 
   const product = await dbService.product.findFirst({ where: { id: parseInt(number) } });
   if ( product === null ) return;
-  
-  await ctx.sendInvoice({
-    title: `Оплата товара #${ product.id }`,
-    description: `**Название**: ${ product.name }`,
-    payload: product.id,
-    currency: 'XTR',
-    prices: [{ label: 'XTR', amount: product.price }],
-    provider_token: ''
-  });
+
+  try {
+    await ctx.sendInvoice({
+      title: `Оплата товара #${ product.id }`,
+      description: `Название: ${ product.name }`,
+      payload: product.id,
+      currency: 'XTR',
+      prices: [{ label: 'XTR', amount: product.price }],
+      provider_token: ''
+    });
+  } catch {
+    ctx.replyWithHTML("<b>Цена товара слишком велика для Telegram API! Поэтому товар нельзя купить!</b>");
+  }
 });
 
 // Добавление товара
 
 bot.command('add', (ctx) => {
-  const chatId = ctx.message.id;
+  const chatId = ctx.chat.id;
   userResponses[chatId] = { step: 0, answers: [] };
   ctx.replyWithHTML(messages.questions[0]);
 });
@@ -78,7 +82,7 @@ bot.command('catalog', async (ctx) => {
 // Обработчик для создания товара
 
 bot.on('text', async (ctx) => {
-  const chatId = ctx.message.id;
+  const chatId = ctx.chat.id;  
   const userData = userResponses[chatId];
 
   if ( !userData ) return;
