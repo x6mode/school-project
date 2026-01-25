@@ -9,10 +9,10 @@ import { opportunity } from '@/locale';
 const OpportunityLayout = (): ReactNode => {
   return (
     <ItemGroup className='gap-6 max-lg:flex-col px-3 max-lg:gap-2 grid grid-cols-4 max-lg:grid-cols-2 max-lg:grid-rows-2 auto-rows-auto'>
-      {opportunity.map((opportunity) => (
+      {opportunity.map((opportunity, index) => (
         <Opportunity
           key={opportunity.title}
-          opportunity={opportunity}
+          opportunity={{ ...opportunity, index }}
         />
       ))}
     </ItemGroup>

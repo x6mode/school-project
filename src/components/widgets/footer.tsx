@@ -12,7 +12,7 @@ const Footer = (): ReactNode => {
       <Separator className='my-6' />
       <div className='flex justify-center items-center **:text-base'>
         <span className='font-bold mr-2 gradient-animation'>RikoaTech</span>
-        <span className='text-neutral-400'>| сайт создан</span>
+        <span className='text-muted-foreground'>| сайт создан</span>
         <Button
           asChild
           variant='link'

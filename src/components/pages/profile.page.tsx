@@ -27,7 +27,7 @@ const ProfilePage = (): ReactNode => {
             value='sell'
             className='perspective-anim'
           >
-            <h1 className='text-center w-full mt-1 text-lg text-neutral-400'>
+            <h1 className='text-center w-full mt-1 text-lg text-muted-foreground'>
               Страница на которой показаны ваши текущие выставленные товары
             </h1>
             <div className='w-full my-6 grid place-items-center'>

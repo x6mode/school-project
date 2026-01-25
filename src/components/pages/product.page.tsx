@@ -8,9 +8,20 @@ import BuyProductDrawer from '@/components/features/buy-product-drawer';
 import { Badge } from '@/components/shared/badge';
 import { Separator } from '@/components/shared/separator';
 import { Button } from '@/components/shared/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/shared/card';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '@/components/shared/card';
 
-import { ChartContainer, ChartTooltip, ChartTooltipContent, type ChartConfig } from '@/components/shared/charts';
+import {
+  ChartContainer,
+  ChartTooltip,
+  ChartTooltipContent,
+  type ChartConfig,
+} from '@/components/shared/charts';
 import { CartesianGrid, LabelList, Line, LineChart, XAxis } from 'recharts';
 
 import { Handshake, IdCard } from 'lucide-react';
@@ -50,8 +61,10 @@ const ProductPage = (): ReactNode => {
               >
                 <IdCard /> <b>ID:</b> b3f5-fc54-cat55-48fn
               </Badge>
-              <h1 className='text-3xl font-semibold max-md:text-2xl'>Название продукта</h1>
-              <p className='text-neutral-500 mb-5'>
+              <h1 className='text-3xl font-semibold max-md:text-2xl'>
+                Название продукта
+              </h1>
+              <p className='text-muted-foreground mb-5'>
                 Создано <span className='text-blue-400 font-medium'>@x6modee</span>
               </p>
               <div className='stat grid grid-cols-2 grid-rows-subgrid gap-4 max-lg:gap-2 max-[27rem]:grid-cols-3 max-[27rem]:*:col-span-full'>
@@ -161,9 +174,10 @@ const ProductPage = (): ReactNode => {
             </div>
             <Separator className='my-5' />
             <h1 className='font-semibold text-2xl mb-2'>Описание</h1>
-            <p className='text-base text-neutral-400'>
-              Шедевральное описание данного продукта, которое заслуживает сотни мнений различных экспертов области
-              получения данных сфер. Самый отборный и разообразный контент выкладывается в умы данных разумов
+            <p className='text-base text-muted-foreground'>
+              Шедевральное описание данного продукта, которое заслуживает сотни мнений
+              различных экспертов области получения данных сфер. Самый отборный и
+              разообразный контент выкладывается в умы данных разумов
             </p>
           </div>
         </div>

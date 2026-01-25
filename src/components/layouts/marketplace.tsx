@@ -9,9 +9,10 @@ const MarketplaceLayout = (): ReactNode => {
   return (
     <main className='mt-20 px-3 max-lg:mt-10'>
       <div className='grid place-items-center'>
-        <h1 className='text-3xl font-semibold'>Маркетплейс</h1>
-        <p className='text-neutral-400 text-lg text-center'>
-          Место продажи и покупки, найдите нужный товар затем нажмите на него для подробностей
+        <h1 className='text-3xl font-semibold mb-1'>Маркетплейс</h1>
+        <p className='text-muted-foreground text-lg text-center'>
+          Место продажи и покупки, найдите нужный товар затем нажмите на него для
+          подробностей
         </p>
         <div className='w-1/2 my-6'>
           <Separator />

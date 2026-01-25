@@ -24,7 +24,10 @@ type TProps = {
   onClose?: () => void;
 };
 
-const BuyProductDrawer = ({ children, onClose }: PropsWithChildren<TProps>): ReactNode => {
+const BuyProductDrawer = ({
+  children,
+  onClose,
+}: PropsWithChildren<TProps>): ReactNode => {
   const [isop, setop] = useState(true);
 
   const [height, setHeight] = useState<number>(0);
@@ -44,7 +47,7 @@ const BuyProductDrawer = ({ children, onClose }: PropsWithChildren<TProps>): Rea
       }}
     >
       <DrawerTrigger asChild>{children}</DrawerTrigger>
-      <DrawerContent className='mx-auto max-w-[700px]'>
+      <DrawerContent className='mx-auto max-w-[700px] bg-background'>
         <AnimatePresence
           initial={false}
           mode='wait'
@@ -60,8 +63,14 @@ const BuyProductDrawer = ({ children, onClose }: PropsWithChildren<TProps>): Rea
             >
               <div>
                 <motion.div
-                  initial={{ opacity: 0, filter: 'drop-shadow(0 0 0 var(--color-green-400))' }}
-                  animate={{ opacity: 1, filter: 'drop-shadow(0 0 25px var(--color-green-400))' }}
+                  initial={{
+                    opacity: 0,
+                    filter: 'drop-shadow(0 0 0 var(--color-green-400))',
+                  }}
+                  animate={{
+                    opacity: 1,
+                    filter: 'drop-shadow(0 0 25px var(--color-green-400))',
+                  }}
                   exit={{ opacity: 0 }}
                   transition={animationNormally}
                   className='flex justify-center'
@@ -99,7 +108,8 @@ const BuyProductDrawer = ({ children, onClose }: PropsWithChildren<TProps>): Rea
               <DrawerHeader>
                 <DrawerTitle>Вы уверены?</DrawerTitle>
                 <DrawerDescription>
-                  Вы подписываетесь на товар <span className='text-blue-400 font-medium'>@x6modee</span>
+                  Вы подписываетесь на товар{' '}
+                  <span className='text-blue-400 font-medium'>@x6modee</span>
                 </DrawerDescription>
               </DrawerHeader>
               <DrawerFooter className='grid place-items-center'>
