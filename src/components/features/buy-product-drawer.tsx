@@ -1,4 +1,6 @@
 import { useCallback, useState, type PropsWithChildren, type ReactNode } from 'react';
+import type { TProduct } from '@/app/types/product';
+
 import { Link } from 'react-router-dom';
 
 import { AnimatePresence, motion } from 'framer-motion';
@@ -21,11 +23,13 @@ import { ArrowRight, Check, Handshake } from 'lucide-react';
 import { animationNormally, AppRoutes } from '@/constant';
 
 type TProps = {
+  product: TProduct;
   onClose?: () => void;
 };
 
 const BuyProductDrawer = ({
   children,
+  product,
   onClose,
 }: PropsWithChildren<TProps>): ReactNode => {
   const [isop, setop] = useState(true);
@@ -109,7 +113,9 @@ const BuyProductDrawer = ({
                 <DrawerTitle>Вы уверены?</DrawerTitle>
                 <DrawerDescription>
                   Вы подписываетесь на товар{' '}
-                  <span className='text-blue-400 font-medium'>@x6modee</span>
+                  <span className='text-blue-400 font-medium'>
+                    @{product.creator.nickname}
+                  </span>
                 </DrawerDescription>
               </DrawerHeader>
               <DrawerFooter className='grid place-items-center'>
@@ -117,7 +123,7 @@ const BuyProductDrawer = ({
                   <div className='flex items-center justify-between w-full font-semibold'>
                     <h1 className='text-lg'>К оплате</h1>
                     <div className='flex items-center justify-end gap-2 text-xl text-blue-500'>
-                      <p>2509 </p>
+                      <p>{product.current_price} </p>
                       <span>
                         <Handshake />
                       </span>

@@ -2,11 +2,10 @@ import type { TAccount } from './account';
 
 type TProduct = {
   id: string;
-  photoUrl: string;
+  photo_url: string;
   creator: TAccount;
   title: string;
-  description: string;
-  updatedAt: Date;
+  current_price: number
 };
 
 export type { TProduct };

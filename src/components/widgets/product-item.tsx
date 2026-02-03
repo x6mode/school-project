@@ -1,14 +1,29 @@
 import type { ReactNode } from 'react';
+import type { TProduct } from '@/app/types/product';
+
 import { Link } from 'react-router-dom';
 
 import { Button } from '@/components/shared/button';
-import { Item, ItemContent, ItemDescription, ItemFooter, ItemHeader, ItemTitle } from '@/components/shared/item';
+import {
+  Item,
+  ItemContent,
+  ItemDescription,
+  ItemFooter,
+  ItemHeader,
+  ItemTitle,
+} from '@/components/shared/item';
 
 import { CornerDownRight, Handshake } from 'lucide-react';
 
 import { AppRoutes } from '@/constant';
 
-const ProductItem = (): ReactNode => {
+import { getPathToImage } from '@/utils/getPathToImage';
+
+type TProps = {
+  product: TProduct;
+};
+
+const ProductItem = ({ product }: TProps): ReactNode => {
   return (
     <Item
       variant='outline'
@@ -16,18 +31,18 @@ const ProductItem = (): ReactNode => {
     >
       <ItemHeader>
         <img
-          src='https://i.ibb.co/w8MwBXv/36ea842b-23d8-458f-86e9-f383bf6538db.jpg'
+          src={getPathToImage(product.photo_url)}
           alt='Фотография'
           className='aspect-square w-full rounded-sm object-cover'
         />
       </ItemHeader>
       <ItemContent className='flex-col-reverse'>
-        <ItemTitle className='font-medium text-base'>Грустное лето</ItemTitle>
-        <ItemDescription>IvanR35</ItemDescription>
+        <ItemTitle className='font-medium text-base'>{product.title}</ItemTitle>
+        <ItemDescription>{product.creator.nickname}</ItemDescription>
       </ItemContent>
       <ItemFooter className='flex w-full justify-between items-center'>
         <div className='flex items-center gap-2'>
-          <h1 className='text-lg'>1599</h1>
+          <h1 className='text-lg'>{product.current_price}</h1>
           <Handshake
             size={18}
             className='opacity-50'
@@ -38,7 +53,10 @@ const ProductItem = (): ReactNode => {
           variant='outline'
           size='icon'
         >
-          <Link to={AppRoutes.Product.replace(':id', '123')}>
+          <Link
+            to={AppRoutes.Product.replace(':id', product.id)}
+            state={product}
+          >
             <CornerDownRight />
           </Link>
         </Button>

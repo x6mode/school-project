@@ -13,10 +13,12 @@ const ThemeStorageKey = 'app-theme';
 
 const MIN_WIDTH_FOR_ANIM_HEADER = '64rem';
 
-const BASE_URL = 'http://localhost:5000/api';
+// const BASE_URL = 'http://localhost:5000/api';
+const BASE_URL = 'http://192.168.3.8:5000/api';
 
 const BackendRoutes = {
-  Products: '/product/',
+  Products: '/products',
+  Product: '/products/:id',
   Buyers: '/product/:id/buyers/',
   Photo: '/photos/:id/',
   BuyProduct: '/product/buy/',
