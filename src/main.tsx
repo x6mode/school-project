@@ -14,7 +14,9 @@ import { setupTheme } from '@/utils/setup-theme';
 import './global.css';
 
 const rootElement = document.getElementById('app') as HTMLElement;
-const queryClient = new QueryClient({ defaultOptions: { queries: { retry: 0 } } });
+const queryClient = new QueryClient({
+  defaultOptions: { queries: { retry: 0, staleTime: 0 } },
+});
 
 setupTheme();
 
@@ -22,7 +24,7 @@ createRoot(rootElement).render(
   <StrictMode>
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
-        <Toaster position='top-center'  />
+        <Toaster position='top-center' />
         <ScrollToTop />
         <AppRouter />
       </BrowserRouter>

@@ -1,5 +1,7 @@
 import type { ReactNode } from 'react';
 
+import { toast } from 'sonner';
+
 import { useUserStore } from '@/app/store/store';
 import { useNavigate } from 'react-router-dom';
 
@@ -74,7 +76,6 @@ const ProfilePage = (): ReactNode => {
                   Выйти c аккаунта
                 </Button>
                 <Button
-                  disabled={!data.can_declare_bankruptcy}
                   size={'sm'}
                   variant={'destructive'}
                   onClick={async () => {
@@ -85,6 +86,7 @@ const ProfilePage = (): ReactNode => {
                       can_declare_bankruptcy: false,
                       bankruptcy_count: data.bankruptcy_count + 1,
                     });
+                    toast.info(`Вы банкрот! Ваш новый баланс ${new_balance} AC`);
                   }}
                 >
                   Обанкротится
@@ -92,7 +94,6 @@ const ProfilePage = (): ReactNode => {
                 <Button
                   size={'sm'}
                   variant={'secondary'}
-                  disabled={!data.can_claim_daily_bonus}
                   onClick={async () => {
                     const { new_balance } = await MarketApiInstance.claimDailyBonus();
                     setData({
@@ -100,6 +101,7 @@ const ProfilePage = (): ReactNode => {
                       balance: new_balance,
                       can_claim_daily_bonus: false,
                     });
+                    toast.info(`Ваш новый баланс ${new_balance} AC`);
                   }}
                 >
                   Получить ежедневный бонус
@@ -135,7 +137,7 @@ const ProfilePage = (): ReactNode => {
         </div>
         <Tabs
           className='grid place-items-center'
-          defaultValue='sell'
+          defaultValue='buy'
         >
           <TabsList className='max-w-xl w-full h-min *:py-2 gap-1'>
             <TabsTrigger value='buy'>Что я купил</TabsTrigger>

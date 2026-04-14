@@ -46,6 +46,7 @@ const BuyProductDrawer = ({
       setData({ ...data!, balance: data!.balance - payload.price });
       if (onClose) onClose();
       queryClient.invalidateQueries({ queryKey: ['product', product.id] });
+      queryClient.invalidateQueries({ queryKey: ['products', 'infinite'] });
       toast.info(`Товар "${product.id.slice(0, 13)}" теперь ваш!`);
     },
   });

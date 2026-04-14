@@ -28,7 +28,7 @@ export const useProductsInfinite = (params?: UseProductsInfiniteParams) => {
     } = params || {};
 
     return useInfiniteQuery<ProductsResponse, Error, ProductsInfiniteData>({
-        queryKey: ['products', 'infinite', pageSize],
+        queryKey: ['products', 'infinite'],
         queryFn: ({ pageParam }) => fetchProducts({ page: pageParam as number }),
         initialPageParam: 1,
         getNextPageParam: (lastPage, allPages) => {

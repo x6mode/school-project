@@ -23,7 +23,7 @@ const SellingListLayout = (): ReactNode => {
 
   return (
     <div
-      className={`grid place-items-center gap-4 grid-cols-2 max-lg:gap-2 sm:grid-cols-2 lg:grid-cols-5 xl:grid-cols-7 w-full ${!data || data.purchased_products.length == 0 ? 'flex! justify-center! items-center!' : ''}`}
+      className={`grid place-items-center gap-4 grid-cols-2! max-lg:gap-2 sm:grid-cols-2! lg:grid-cols-5! xl:grid-cols-7! w-full ${!data || data.products_for_sale.length == 0 ? 'flex! justify-center! items-center!' : ''}`}
     >
       {(!data || data.products_for_sale.length == 0) && (
         <Empty>
