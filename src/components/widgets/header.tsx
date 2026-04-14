@@ -1,9 +1,18 @@
 import { useCallback, useEffect, useRef, type ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 
+import { useUserStore } from '@/app/store/store';
+
 import { Separator } from '@/components/shared/separator';
 import { Button } from '@/components/shared/button';
-import { Item, ItemActions, ItemContent, ItemMedia, ItemTitle } from '@/components/shared/item';
+import {
+  Item,
+  ItemActions,
+  ItemContent,
+  ItemMedia,
+  ItemTitle,
+} from '@/components/shared/item';
+import AccountInfo from '@/components/widgets/account-info';
 
 import ThemeToggler from '@/components/widgets/theme-toggler';
 
@@ -14,9 +23,14 @@ import { AppRoutes, MIN_WIDTH_FOR_ANIM_HEADER } from '@/constant';
 import { scrollWidthAnim } from '@/utils/scroll-width-anim';
 
 const Header = (): ReactNode => {
+  const data = useUserStore((state) => state.data);
+
   const subHeaderRef = useRef<HTMLDivElement | null>(null);
 
-  const scrollAnimFuncMemo = useCallback(() => scrollWidthAnim(subHeaderRef, { frames: 1000, speed: 700 }), []);
+  const scrollAnimFuncMemo = useCallback(
+    () => scrollWidthAnim(subHeaderRef, { frames: 1000, speed: 700 }),
+    [],
+  );
 
   useEffect(() => {
     if (window.matchMedia(`(width >= ${MIN_WIDTH_FOR_ANIM_HEADER})`).matches) {
@@ -42,7 +56,7 @@ const Header = (): ReactNode => {
         <ItemContent>
           <ItemTitle>
             <Link to={AppRoutes.Main}>
-              <h1 className='text-xl mr-6'>RikoaTech</h1>
+              <h1 className='max-lg:text-lg text-xl max-lg:mr-2 mr-6'>RikoaTech</h1>
             </Link>
           </ItemTitle>
         </ItemContent>
@@ -52,11 +66,18 @@ const Header = (): ReactNode => {
             className='mx-2 h-5!'
             orientation='vertical'
           />
-          <Link to={AppRoutes.Login}>
-            <Button variant='outline'>
-              <Fingerprint /> Авторизация
-            </Button>
-          </Link>
+          {data ? (
+            <AccountInfo
+              nickname={data.nickname}
+              balance={data.balance}
+            />
+          ) : (
+            <Link to={AppRoutes.Login}>
+              <Button variant='outline'>
+                <Fingerprint /> Авторизация
+              </Button>
+            </Link>
+          )}
         </ItemActions>
       </Item>
     </header>

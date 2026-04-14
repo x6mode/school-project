@@ -1,5 +1,4 @@
 import type { ReactNode } from 'react';
-import type { TProduct } from '@/app/types/product';
 
 import { Link } from 'react-router-dom';
 
@@ -19,8 +18,10 @@ import { AppRoutes } from '@/constant';
 
 import { getPathToImage } from '@/utils/getPathToImage';
 
+import { ProductWithCreator } from '@/app/types/api';
+
 type TProps = {
-  product: TProduct;
+  product: ProductWithCreator;
 };
 
 const ProductItem = ({ product }: TProps): ReactNode => {
@@ -42,7 +43,7 @@ const ProductItem = ({ product }: TProps): ReactNode => {
       </ItemContent>
       <ItemFooter className='flex w-full justify-between items-center'>
         <div className='flex items-center gap-2'>
-          <h1 className='text-lg'>{product.current_price}</h1>
+          <h1 className='text-lg'>{product.price}</h1>
           <Handshake
             size={18}
             className='opacity-50'

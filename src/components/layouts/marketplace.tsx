@@ -1,6 +1,6 @@
 import { type ReactNode } from 'react';
 
-import { useInfiniteQuery } from '@tanstack/react-query';
+import { useAllProducts } from '@/hooks/use-products';
 
 import { Button } from '@/components/shared/button';
 import { Separator } from '@/components/shared/separator';
@@ -17,21 +17,9 @@ import ProductsLayout from '@/components/layouts/products';
 
 import { ChevronRight, FileX, RefreshCcwIcon } from 'lucide-react';
 
-import { getAllProducts } from '@/endpoints/query/getAllProducts';
-
-import { getNextPageParam } from '@/utils/getNextPageParam';
-
 const MarketplaceLayout = (): ReactNode => {
-  const { data, isLoading, isError, refetch, fetchNextPage, hasNextPage } =
-    useInfiniteQuery({
-      queryKey: ['products'],
-      queryFn: getAllProducts,
-      initialPageParam: 1,
-      getNextPageParam: (lastPage) =>
-        getNextPageParam(lastPage.pagination.page, lastPage.pagination.pages),
-    });
-
-  const allItems = data?.pages.flatMap((page) => page.data) || [];
+  const { allProducts, isLoading, isError, refetch, hasNextPage, fetchNextPage } =
+    useAllProducts({ enabled: true });
 
   return (
     <main className='mt-20 px-3 max-lg:mt-10'>
@@ -45,7 +33,8 @@ const MarketplaceLayout = (): ReactNode => {
           <Separator />
         </div>
       </div>
-      {((allItems.length === 0 && !isLoading) || (isError && allItems.length !== 0)) && (
+      {((allProducts.length === 0 && !isLoading) ||
+        (isError && allProducts.length !== 0)) && (
         <Empty>
           <EmptyHeader>
             <EmptyMedia variant='icon'>
@@ -68,7 +57,7 @@ const MarketplaceLayout = (): ReactNode => {
         </Empty>
       )}
 
-      <ProductsLayout products={allItems} />
+      <ProductsLayout products={allProducts} />
 
       {hasNextPage && (
         <div className='w-full *:mt-4 grid place-items-center'>

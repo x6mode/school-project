@@ -4,7 +4,8 @@ import { createRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import AppRouter from './app/app-router';
 
-import ScrollToTop from './components/widgets/scroll-to-top';
+import ScrollToTop from '@/components/widgets/scroll-to-top';
+import { Toaster } from '@/components/shared/sonner';
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
@@ -21,6 +22,7 @@ createRoot(rootElement).render(
   <StrictMode>
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
+        <Toaster position='top-center'  />
         <ScrollToTop />
         <AppRouter />
       </BrowserRouter>

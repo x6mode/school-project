@@ -1,10 +1,11 @@
 import type { ReactNode } from 'react';
-import type { TProduct } from '@/app/types/product';
 
 import ProductItem from '@/components/widgets/product-item';
 
+import { ProductWithCreator } from '@/app/types/api';
+
 type TProps = {
-  products: TProduct[] | undefined;
+  products: ProductWithCreator[] | undefined;
 };
 
 const ProductsLayout = ({ products }: TProps): ReactNode => {

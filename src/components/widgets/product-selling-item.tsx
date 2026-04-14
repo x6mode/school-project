@@ -14,21 +14,23 @@ import {
 } from '@/components/shared/alert-dialog';
 import { Button } from '@/components/shared/button';
 
-import { PenLine, Trash2 } from 'lucide-react';
+import { Trash2 } from 'lucide-react';
 
-const ProductSellingItem = (): ReactNode => {
+import { Product, SaleHistoryItem } from '@/app/types/api';
+
+type TProps = {
+  product: Product;
+  profile: {
+    nickname: string;
+    id: string;
+  };
+};
+
+const ProductSellingItem = ({ product, profile }: TProps): ReactNode => {
   return (
     <div className='relative'>
-      <ProductItem />
+      <ProductItem product={{ ...product, creator: profile }} />
       <div className='absolute top-4 right-4 gap-2 flex'>
-        <Button
-          variant={'secondary'}
-          size={'icon-sm'}
-          className='glass'
-        >
-          <PenLine />
-        </Button>
-
         <AlertDialog>
           <AlertDialogTrigger asChild>
             <Button
@@ -39,10 +41,11 @@ const ProductSellingItem = (): ReactNode => {
               <Trash2 />
             </Button>
           </AlertDialogTrigger>
-        <AlertDialogContent className='smooth-anim'>
+          <AlertDialogContent className='smooth-anim'>
             <AlertDialogHeader>Вы уверены?</AlertDialogHeader>
             <AlertDialogDescription>
-              Это действие нельзя отменить, оно приведет к полному удалению записи с наших серверов
+              Это действие нельзя отменить, оно приведет к полному удалению записи с наших
+              серверов
             </AlertDialogDescription>
             <AlertDialogFooter>
               <AlertDialogCancel asChild>

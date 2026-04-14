@@ -1,5 +1,9 @@
 import type { ReactNode } from 'react';
+
 import { Route, Routes } from 'react-router-dom';
+
+import AuthProtect from '@/app/auth-protect';
+import AuthLoading from '@/components/layouts/auth-loading';
 
 import MainPage from '@/components/pages/main.page';
 import ProductPage from '@/components/pages/product.page';
@@ -17,29 +21,31 @@ const AppRouter = (): ReactNode => {
   return (
     <Routes>
       {/* No auth routes */}
-      <Route
-        path={AppRoutes.Main}
-        element={<MainPage />}
-      />
-      <Route
-        path={AppRoutes.Login}
-        element={<LoginPage />}
-      />
-      <Route
-        path={AppRoutes.Register}
-        element={<RegisterPage />}
-      />
-      <Route
-        path={AppRoutes.Product}
-        element={<ProductPage />}
-      />
+      <Route element={<AuthLoading />}>
+        <Route
+          path={AppRoutes.Main}
+          element={<MainPage />}
+        />
+        <Route
+          path={AppRoutes.Login}
+          element={<LoginPage />}
+        />
+        <Route
+          path={AppRoutes.Register}
+          element={<RegisterPage />}
+        />
+        <Route
+          path={AppRoutes.Product}
+          element={<ProductPage />}
+        />
 
-      {/* Auth routes */}
-      <Route
-        path={AppRoutes.Profile}
-        element={<ProfilePage />}
-      >
-        {/* routes */}
+        {/* Auth routes */}
+        <Route element={<AuthProtect />}>
+          <Route
+            path={AppRoutes.Profile}
+            element={<ProfilePage />}
+          />
+        </Route>
       </Route>
 
       {/* 404 route */}

@@ -4,10 +4,12 @@ import { Navigate, Outlet } from 'react-router-dom';
 
 import { AppRoutes } from '@/constant';
 
-const AuthProtect = (): ReactNode => {
-  const isAuthorized = true;
+import { useUserStore } from './store/store';
 
-  return isAuthorized ? <Outlet /> : <Navigate to={AppRoutes.Login} />;
+const AuthProtect = (): ReactNode => {
+  const { data } = useUserStore();
+
+  return data?.mail ? <Outlet /> : <Navigate to={AppRoutes.Main} />;
 };
 
 export default AuthProtect;
