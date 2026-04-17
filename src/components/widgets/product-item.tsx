@@ -37,10 +37,8 @@ const ProductItem = ({ product }: TProps): ReactNode => {
           className='aspect-square w-full rounded-sm object-cover'
         />
       </ItemHeader>
-      <ItemContent className='flex-col-reverse w-full'>
-        <ItemTitle className='font-medium text-base text-nowrap text-ellipsis whitespace-nowrap overflow-hidden'>
-          {product.title}
-        </ItemTitle>
+      <ItemContent className='flex-col-reverse w-full *:text-nowrap *:text-ellipsis *:whitespace-nowrap *:overflow-hidden *:max-w-full'>
+        <ItemTitle className='font-medium text-base'>{product.title}</ItemTitle>
         <ItemDescription>{product.creator.nickname}</ItemDescription>
       </ItemContent>
       <ItemFooter className='flex w-full justify-between items-center'>
