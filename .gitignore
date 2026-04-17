@@ -24,4 +24,5 @@ dist-ssr
 *.sw?
 
 .db.json
-/.temp/
+/temp/
+/temp_back/
