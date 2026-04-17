@@ -41,7 +41,7 @@ class MarketApiClient {
 
     this.axiosInstance = axios.create({
       baseURL: this.baseUrl,
-      timeout: 2000,
+      timeout: 10000,
       headers: {
         'Content-Type': 'application/json',
       },
@@ -66,7 +66,11 @@ class MarketApiClient {
           return Promise.reject(error);
         }
 
-        if (error.response?.status != 401 && error instanceof AxiosError) {
+        if (
+          error.response?.status != 401 &&
+          error instanceof AxiosError &&
+          (error as AxiosError<{ error: string }>).response?.data.error
+        ) {
           toast.error((error as AxiosError<{ error: string }>).response?.data.error);
         }
 

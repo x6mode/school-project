@@ -2,15 +2,6 @@ import { useRef, type ReactNode } from 'react';
 
 import { useMetaHotkey } from '@/hooks/use-meta-hotkey';
 
-import { Search } from 'lucide-react';
-
-import { Kbd } from '@/components/shared/kbd';
-import {
-  InputGroup,
-  InputGroupInput,
-  InputGroupAddon,
-} from '@/components/shared/input-group';
-
 const WelcomeLayout = (): ReactNode => {
   const inputRef = useRef<HTMLInputElement | null>(null);
 
@@ -35,7 +26,7 @@ const WelcomeLayout = (): ReactNode => {
           Маркетплейс эксклюзивного цифрового контента. Каждая работа существует в
           единственном экземпляре.
         </p>
-        <InputGroup className='h-12 w-3/4 flex mt-4'>
+        {/* <InputGroup className='h-12 w-3/4 flex mt-4'>
           <InputGroupInput
             ref={inputRef}
             placeholder='Найти автора, работу, название...'
@@ -48,7 +39,7 @@ const WelcomeLayout = (): ReactNode => {
             <Kbd>Alt</Kbd>
             <Kbd>J</Kbd>
           </InputGroupAddon>
-        </InputGroup>
+        </InputGroup> */}
       </div>
     </div>
   );

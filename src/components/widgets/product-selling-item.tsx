@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react';
 
 import ProductItem from '@/components/widgets/product-item';
+import { toast } from 'sonner';
 
 import {
   AlertDialog,
@@ -16,7 +17,10 @@ import { Button } from '@/components/shared/button';
 
 import { Trash2 } from 'lucide-react';
 
-import { Product, SaleHistoryItem } from '@/app/types/api';
+import { Product } from '@/app/types/api';
+import MarketApiInstance from '@/service/api.service';
+import { AxiosError } from 'axios';
+import { useQueryClient } from '@tanstack/react-query';
 
 type TProps = {
   product: Product;
@@ -27,6 +31,8 @@ type TProps = {
 };
 
 const ProductSellingItem = ({ product, profile }: TProps): ReactNode => {
+  const queryClient = useQueryClient();
+
   return (
     <div className='relative'>
       <ProductItem product={{ ...product, creator: profile }} />
@@ -52,7 +58,21 @@ const ProductSellingItem = ({ product, profile }: TProps): ReactNode => {
                 <Button variant={'outline'}>Отмена</Button>
               </AlertDialogCancel>
               <AlertDialogAction asChild>
-                <Button variant={'destructive'}>
+                <Button
+                  variant={'destructive'}
+                  onClick={async () => {
+                    try {
+                      const data = await MarketApiInstance.removeProduct(product.id);
+                      if (data.message) toast.info(data.message);
+                    } catch (e) {
+                      if (e instanceof AxiosError) {
+                        toast.error(e.response?.data);
+                      }
+                    } finally {
+                      queryClient.invalidateQueries({ queryKey: ['selling_products'] });
+                    }
+                  }}
+                >
                   <Trash2 /> Снять
                 </Button>
               </AlertDialogAction>

@@ -15,7 +15,7 @@ import './global.css';
 
 const rootElement = document.getElementById('app') as HTMLElement;
 const queryClient = new QueryClient({
-  defaultOptions: { queries: { retry: 0, staleTime: 0 } },
+  defaultOptions: { queries: { retry: 0, staleTime: 0, gcTime: 0 } },
 });
 
 setupTheme();

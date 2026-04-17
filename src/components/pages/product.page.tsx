@@ -32,13 +32,13 @@ import { animationNormally, FORMULA_FULL_DVH_WO_FOOTER_AND_HEADER } from '@/cons
 
 const ProductPage = (): ReactNode => {
   const { id } = useParams();
+  const userData = useUserStore((state) => state.data);
+
   const { isLoading, data, error } = useQuery({
     queryKey: ['product', id],
     queryFn: () => MarketApiInstance.getProduct(id!),
     enabled: !!id,
   });
-
-  const userData = useUserStore((state) => state.data);
 
   const pastDate = new Date(data?.created_at!);
   const today = new Date();
@@ -121,16 +121,18 @@ const ProductPage = (): ReactNode => {
                 {(data.on_sale ?? true) && (
                   <div>
                     <BuyProductDrawer product={data}>
-                      <Button
-                        className='w-full mt-5'
-                        size='lg'
-                        disabled={userData ? userData.balance < data.price : true}
-                      >
-                        Купить за {data.price}{' '}
-                        <span>
-                          <Handshake />
-                        </span>
-                      </Button>
+                      {data.creator.id != userData?.id && (
+                        <Button
+                          className='w-full mt-5'
+                          size='lg'
+                          disabled={userData ? userData.balance < data.price : true}
+                        >
+                          Купить за {data.price}{' '}
+                          <span>
+                            <Handshake />
+                          </span>
+                        </Button>
+                      )}
                     </BuyProductDrawer>
                   </div>
                 )}
