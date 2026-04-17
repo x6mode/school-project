@@ -16,8 +16,8 @@ const FORMULA_FULL_DVH_WO_FOOTER_AND_HEADER = 'calc(100dvh - 195px)';
 
 // const BASE_URL = 'http://192.168.3.15:5000/api';
 // const BASE_URL = 'http://192.168.3.8:5000/api';
-const BASE_URL = 'https://06swb03p-5000.euw.devtunnels.ms/api';
-// const BASE_URL = 'http://localhost:5000/api';
+// const BASE_URL = 'https://06swb03p-5000.euw.devtunnels.ms/api';
+const BASE_URL = 'https://rikoa.tech/api';
 
 const BackendRoutes = {
   Products: '/products',
