@@ -173,7 +173,7 @@ const SellProductModal = ({ trigger }: { trigger: ReactNode }): ReactNode => {
           className='grid gap-6 py-4'
         >
           <div className='space-y-2'>
-            <Label>Фотография товара *</Label>
+            <Label>Фотография товара</Label>
             {!imagePreview ? (
               <div
                 onDrop={handleDrop}

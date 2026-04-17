@@ -30,14 +30,14 @@ const ProductItem = ({ product }: TProps): ReactNode => {
       variant='outline'
       className='w-full p-3 max-lg:p-2'
     >
-      <ItemHeader>
+      <ItemHeader className='max-w-full w-full'>
         <img
           src={getPathToImage(product.photo_url)}
           alt='Фотография'
           className='aspect-square w-full rounded-sm object-cover'
         />
       </ItemHeader>
-      <ItemContent className='flex-col-reverse'>
+      <ItemContent className='flex-col-reverse w-full'>
         <ItemTitle className='font-medium text-base text-nowrap text-ellipsis whitespace-nowrap overflow-hidden'>
           {product.title}
         </ItemTitle>
