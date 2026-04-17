@@ -80,7 +80,7 @@ const ProductPage = (): ReactNode => {
                   variant='outline'
                   className='gap-1.5 text-base px-3 mb-5 max-md:mb-2 max-md:text-sm'
                 >
-                  <IdCard /> <b>ID:</b> {data.id}
+                  <IdCard /> <b>ID:</b> {data.id.slice(0, 13)}
                 </Badge>
                 <h1 className='text-3xl font-semibold max-md:text-2xl'>{data.title}</h1>
                 <p className='text-muted-foreground mb-5'>

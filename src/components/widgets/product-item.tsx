@@ -11,7 +11,7 @@ import {
   ItemHeader,
   ItemTitle,
 } from '@/components/shared/item';
-
+ 
 import { CornerDownRight, Handshake } from 'lucide-react';
 
 import { AppRoutes } from '@/constant';
@@ -37,7 +37,7 @@ const ProductItem = ({ product }: TProps): ReactNode => {
           className='aspect-square w-full rounded-sm object-cover'
         />
       </ItemHeader>
-      <ItemContent className='flex-col-reverse w-full *:text-nowrap *:text-ellipsis *:whitespace-nowrap *:overflow-hidden *:max-w-full'>
+      <ItemContent className='flex-col-reverse w-full *:text-nowrap *:text-ellipsis *:whitespace-nowrap *:overflow-hidden *:max-w-full *:block'>
         <ItemTitle className='font-medium text-base'>{product.title}</ItemTitle>
         <ItemDescription>{product.creator.nickname}</ItemDescription>
       </ItemContent>

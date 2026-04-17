@@ -34,7 +34,7 @@ const ProductSellingItem = ({ product, profile }: TProps): ReactNode => {
   const queryClient = useQueryClient();
 
   return (
-    <div className='relative'>
+    <div className='relative w-full'>
       <ProductItem product={{ ...product, creator: profile }} />
       <div className='absolute top-4 right-4 gap-2 flex'>
         <AlertDialog>
