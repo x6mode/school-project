@@ -1,6 +1,7 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
-import type { ProductsResponse } from '@/app/types/api';
 import MarketApiInstance from '@/service/api.service';
+
+import type { ProductsResponse } from '@/app/types/api';
 
 interface ProductsInfiniteData {
   pages: ProductsResponse[];
